@@ -1,5 +1,7 @@
 # ec2-control
 
+Test Project Start and stop EC2 Instances from node.js
+
 This project was generated with the [Angular Full-Stack Generator](https://github.com/DaftMonk/generator-angular-fullstack) version 4.1.2.
 
 ## Getting Started
@@ -23,3 +25,4 @@ Run `gulp build` for building and `gulp serve` for preview.
 ## Testing
 
 Running `npm test` will run the unit tests with karma.
+=======
