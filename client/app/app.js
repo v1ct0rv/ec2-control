@@ -16,6 +16,6 @@ angular.module('ec2ControlApp', [
   }).run(function($stormpath){
   $stormpath.uiRouter({
     loginState: 'login',
-    defaultPostLoginState: 'main'
+    defaultPostLoginState: 'ec2Control'
   });
 });
