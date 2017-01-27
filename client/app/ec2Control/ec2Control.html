@@ -1,18 +1,48 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
- 
+
 <div class="container">
-  <div class="row">
-    <div class="col-xs-12">
-      <h3>Ec2 Control</h3>
-      <hr>
+    <div class="row">
+        <div class="col-xs-12">
+            <h3>Ec2 Control</h3> <button class="btn btn-primary" ng-disabled="loadingData" ng-click="load()"><span class="glyphicon glyphicon-refresh"></span> Refresh</button>
+            <hr>
+        </div>
     </div>
-  </div>
- 
-  <div class="row">
-    <div class="col-xs-12">
-      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="server in servers">
-        <li><a href="#" tooltip="{{server}}">{{server}}</a></li>
-      </ul>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div ng-show="loadingData">Loadind Data...</div>
+            <table ng-show="!loadingData" class="table table-hover" ng-repeat="r in reservations">
+                <caption>
+                    <h3>Reservation Id {{r.id}}</h3>
+                </caption>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Instance ID</th>
+                        <th>Instace Type</th>
+                        <th>Public Ip</th>
+                        <th>Private Ip</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="i in r.instances">
+                        <th scope="row">{{$index + 1}}</th>
+                        <td>{{i.name}}</td>
+                        <td>{{i.id}}</td>
+                        <td>{{i.type}}</td>
+                        <td>{{i.publicIp}}</td>
+                        <td>{{i.privateIp}}</td>
+                        <td>{{i.status}}</td>
+                        <td><button type="button" class="btn btn-success" ng-show="i.status == 'stopped'" ng-disabled="loading" ng-click="start(i);">Start</button>
+                            <button type="button" class="btn btn-warning" ng-show="i.status == 'running'" ng-disabled="loading" ng-click="reboot(i);">Reboot</button>
+                            <button type="button" class="btn btn-danger" ng-show="i.status == 'running'" ng-disabled="loading" ng-click="stop(i);">Stop</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-  </div>
 </div>
